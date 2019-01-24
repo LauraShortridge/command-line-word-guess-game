@@ -16,12 +16,14 @@ console.log(randomWord);
 //Require the word.js file
 let Word = require("./word.js");
 
-let pickedWord = new Word(randomWord)
+let pickedWord = new Word(randomWord); 
 
 console.log(pickedWord.displayWord());
 
 //Require inquirer so we can collect a guess from the user
 let inquirer = require("inquirer");
+
+
 
 getALetter();
 
@@ -29,6 +31,30 @@ getALetter();
 //     for (let i = 0; i < pickedWord.length; i ++) {
 //         getALetter(); 
 //     }
+// }
+
+//start game
+    //define incorrect guesses
+    //call a new word
+
+// pickAWord(); 
+
+// function pickAWord() {
+//     let randomWord = wordArray[Math.floor(Math.random()*wordArray.length)];
+//     console.log(randomWord);
+//     let pickedWord = new Word(randomWord); 
+// }
+
+// function makeGuess() {
+//     let incorrectGuess = 10; 
+//     let displayChar = 0;
+//     getALetter().then(function() {
+//         if (displayChar < pickedWord.length) {
+
+//         }
+//     })
+//     //if incorrectGuess is 0 then 
+    
 // }
 
 function getALetter() {
@@ -43,7 +69,6 @@ function getALetter() {
     ])
     .then(answers => {
         console.log(answers.guessedLetter);
-
         pickedWord.guess(answers.guessedLetter);
         console.log(pickedWord.displayWord()); 
         getALetter();

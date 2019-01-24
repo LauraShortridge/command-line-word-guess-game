@@ -22,12 +22,12 @@ function Word(word) {
     this.initializeWord(this.word);
     this.displayWord = function () {
         let displayedword = '';
-        let count = 0; 
+        // let count = 0; 
         for (i = 0; i < this.letterArray.length; i ++) {
             let letter = this.letterArray[i].displayLetter()
-            if (count < this.letterArray.length) {
+            // if (count < this.letterArray.length) {
                 
-            }
+            // }
             displayedword += letter + ' '
         }
         return displayedword
@@ -36,9 +36,10 @@ function Word(word) {
         for (i = 0; i < this.letterArray.length; i ++) {
             if (this.letterArray[i].check(guessedLetter)) {
                 return this.displayWord()
-            } else {
-                console.log("Incorrect guess!");
-            }
+            } 
+            // else {
+            //     console.log("Incorrect guess!");
+            // }
         }
         // console.log("guess has been called");
     }
