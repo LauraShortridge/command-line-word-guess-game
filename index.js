@@ -3,85 +3,74 @@
     //Prompts the user for each guess and keeps track of the user's remaining guesses
 
 //Set number of incorrect guesses to 10
-let incorrectGuess = 10; 
+let incorrectGuess; 
 
 //Create an array to hold the guess words
 let wordArray = ["tiger", "elephant", "swan"];
 
-//Create a variable to hold a random word from the word array
-let randomWord = wordArray[Math.floor(Math.random()*wordArray.length)];
-
-console.log(randomWord);
-
 //Require the word.js file
 let Word = require("./word.js");
 
-let pickedWord = new Word(randomWord); 
-
-console.log(pickedWord.displayWord());
+let pickedWord; 
+let randomWord;
 
 //Require inquirer so we can collect a guess from the user
 let inquirer = require("inquirer");
 
+console.log("\n" + "Guess the secret word! Hint: it's an animal." + "\n");
 
+getAWord(); 
 
-getALetter();
+function getAWord() {
+    //Create a variable to hold a random word from the word array
+    randomWord = wordArray[Math.floor(Math.random()*wordArray.length)];
+    console.log(randomWord);
+    pickedWord = new Word(randomWord); 
+    console.log(pickedWord.displayWord() + "\n");
+    incorrectGuess = 10; 
+    startGuessing();
+}
 
-// function play() {
-//     for (let i = 0; i < pickedWord.length; i ++) {
-//         getALetter(); 
-//     }
-// }
-
-//start game
-    //define incorrect guesses
-    //call a new word
-
-// pickAWord(); 
-
-// function pickAWord() {
-//     let randomWord = wordArray[Math.floor(Math.random()*wordArray.length)];
-//     console.log(randomWord);
-//     let pickedWord = new Word(randomWord); 
-// }
-
-// function makeGuess() {
-//     let incorrectGuess = 10; 
-//     let displayChar = 0;
-//     getALetter().then(function() {
-//         if (displayChar < pickedWord.length) {
-
-//         }
-//     })
-//     //if incorrectGuess is 0 then 
-    
-// }
-
-function getALetter() {
+function startGuessing() {
     inquirer
     //Prompt the user to guess a letter
     .prompt([
         {
-           type: "input",
-           message: "Guess a letter!",
-           name: "guessedLetter"
+            type: "input",
+            message: "Guess a letter!",
+            name: "guessedLetter"
         }
     ])
-    .then(answers => {
-        console.log(answers.guessedLetter);
-        pickedWord.guess(answers.guessedLetter);
-        console.log(pickedWord.displayWord()); 
-        getALetter();
-        // if (guessedLetter === letter) {
-        //     console.log("Correct!")
-        //     Word(); 
-        // } else {
-        //     console.log("Incorrect. Try again!");
-        //     incorrectGuess--;
-        // }
-
+    .then(letters => {
+       makeGuess(letters.guessedLetter);
     });
 }
+
+function makeGuess(guessedLetter) {
+
+    if (incorrectGuess > 1) {
+        if (pickedWord.guess(guessedLetter)) {
+            console.log ("\n" + "Correct!" + "\n");
+            console.log(pickedWord.displayWord(randomWord) + "\n");
+        }
+        else if (!pickedWord.guess(guessedLetter)) {
+            console.log("\n" + "Incorrect!" +  "\n");
+            incorrectGuess--;
+            console.log("Guesses left: " + incorrectGuess + "\n");
+            console.log(pickedWord.displayWord(randomWord) + "\n");
+        };
+        startGuessing();
+  } else if (incorrectGuess <= 1) {
+        loseGame();
+    }
+  }
+
+function loseGame() {
+    console.log("Game over!");
+    console.log("Try again!");
+    getAWord(); 
+}
+
 
 //Need to set wrong guesses to 10
 //Display the word
