@@ -17,25 +17,22 @@ function Word(word) {
     this.initializeWord(this.word);
     //Function that displays the word
     this.displayWord = function() {
-        let displayedword = '';
-        for (i = 0; i < this.letterArray.length; i ++) {
-            let letter = this.letterArray[i].displayLetter();
-            displayedword += letter + ' '
-        }
-        return displayedword
+        return this.letterArray.map(function(guessedLetter) {
+            return guessedLetter.displayLetter();
+        }).join(" ");
     }
     //Function that checks if the guess is correct 
     this.guess = function guess(guessedLetter) {
         for (i = 0; i < this.letterArray.length; i ++) {
-            let charGuessed = true; 
-            if (!this.letterArray[i].check(guessedLetter)) {
-                // return this.displayWord()
-                charGuessed = false; 
-                return charGuessed;
+            if (this.letterArray[i].check(guessedLetter)) {
+                 this.displayWord()
             } 
-            return this.displayWord()
         }
-        
+    }
+    this.isGuessed = function() {
+        return this.letterArray.every(function(guessedLetter) {
+            return guessedLetter.isVisible
+        })
     }
 }
 

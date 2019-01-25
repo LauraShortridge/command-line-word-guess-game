@@ -51,7 +51,7 @@ function makeGuess(guessedLetter) {
     if (incorrectGuess > 1) {
         if (pickedWord.guess(guessedLetter)) {
             console.log ("\n" + "Correct!" + "\n");
-            console.log(pickedWord.displayWord(randomWord) + "\n");
+            pickedWord.displayWord(randomWord) + "\n";
         }
         else if (!pickedWord.guess(guessedLetter)) {
             console.log("\n" + "Incorrect!" +  "\n");
@@ -59,7 +59,11 @@ function makeGuess(guessedLetter) {
             console.log("Guesses left: " + incorrectGuess + "\n");
             console.log(pickedWord.displayWord(randomWord) + "\n");
         };
-        startGuessing();
+        if (pickedWord.isGuessed()) {
+            winGame(); 
+        } else {
+            startGuessing();
+        }
   } else if (incorrectGuess <= 1) {
         loseGame();
     }
@@ -69,6 +73,12 @@ function loseGame() {
     console.log("Game over!");
     console.log("Try again!");
     getAWord(); 
+}
+
+function winGame() {
+    console.log("You have won! Congratulations!");
+    console.log("Play again!");
+    getAWord();
 }
 
 
