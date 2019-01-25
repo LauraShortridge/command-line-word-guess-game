@@ -6,7 +6,7 @@
 let incorrectGuess; 
 
 //Create an array to hold the guess words
-let wordArray = ["tiger", "elephant", "swan"];
+let wordArray = ["tiger", "elephant", "swan", "panda", "bear", "horse", "leopard", "monkey", "snake", "giraffe", "orangutan", "zebra"];
 
 //Require the word.js file
 let Word = require("./word.js");
@@ -24,7 +24,7 @@ getAWord();
 function getAWord() {
     //Create a variable to hold a random word from the word array
     randomWord = wordArray[Math.floor(Math.random()*wordArray.length)];
-    console.log(randomWord);
+    // console.log(randomWord);
     pickedWord = new Word(randomWord); 
     console.log(pickedWord.displayWord() + "\n");
     incorrectGuess = 10; 
@@ -70,14 +70,14 @@ function makeGuess(guessedLetter) {
   }
 
 function loseGame() {
-    console.log("Game over!");
-    console.log("Try again!");
+    console.log("\n" + "Game over!" + "\n");
+    console.log("Try again!" + "\n");
     getAWord(); 
 }
 
 function winGame() {
-    console.log("You have won! Congratulations!");
-    console.log("Play again!");
+    console.log("You have won! Congratulations!" + "\n");
+    console.log("Play again!" + "\n");
     getAWord();
 }
 
