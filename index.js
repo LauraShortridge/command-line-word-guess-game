@@ -47,18 +47,17 @@ function startGuessing() {
 }
 
 function makeGuess(guessedLetter) {
-
     if (incorrectGuess > 1) {
-        if (pickedWord.guess(guessedLetter)) {
+        var isCorrect = pickedWord.guess(guessedLetter)
+        if (isCorrect) {
             console.log ("\n" + "Correct!" + "\n");
-            pickedWord.displayWord(randomWord) + "\n";
         }
-        else if (!pickedWord.guess(guessedLetter)) {
+        else if (!isCorrect) {
             console.log("\n" + "Incorrect!" +  "\n");
             incorrectGuess--;
             console.log("Guesses left: " + incorrectGuess + "\n");
-            console.log(pickedWord.displayWord(randomWord) + "\n");
         };
+        console.log(pickedWord.displayWord(randomWord) + "\n");
         if (pickedWord.isGuessed()) {
             winGame(); 
         } else {
@@ -70,7 +69,7 @@ function makeGuess(guessedLetter) {
   }
 
 function loseGame() {
-    console.log("\n" + "Game over!" + "\n");
+    console.log("\n" +"Game over!" + "\n");
     console.log("Try again!" + "\n");
     getAWord(); 
 }

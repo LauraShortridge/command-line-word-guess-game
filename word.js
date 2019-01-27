@@ -23,11 +23,15 @@ function Word(word) {
     }
     //Function that checks if the guess is correct 
     this.guess = function guess(guessedLetter) {
+        var correct = false;
         for (i = 0; i < this.letterArray.length; i ++) {
             if (this.letterArray[i].check(guessedLetter)) {
-                 this.displayWord()
-            } 
+                 // if we are here, that means a correct letter was guessed
+                correct = true;
+                //  this.displayWord()
+            }
         }
+        return correct;
     }
     this.isGuessed = function() {
         return this.letterArray.every(function(guessedLetter) {
